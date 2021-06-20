@@ -7,6 +7,10 @@ jobs:
       IMAGENAME: chaski-api
       STAGE: dev
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: "building image"
+        run: docker build -t $IMAGENAME .
       - name: "configuring imageName"
         run: |
           if [ "${{ github.ref }}" = "refs/heads/dev" ];
@@ -24,8 +28,5 @@ jobs:
               echo "incorrect branch"
               exit 1
           fi
-      - name: "building image"
-        run: |
-          ls
-          echo $IMAGENAME
+
 
