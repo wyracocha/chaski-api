@@ -1,0 +1,28 @@
+name: creating container
+on: 
+  push:
+    branches:
+      - dev
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    env:
+      imageName: chaski-api
+      stage: dev
+    steps:
+      - name: "configuring imageName"
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/dev" ];
+          then
+              imageName=$imageName-dev
+          elif [ "${{ github.ref }}" = "refs/heads/staging" ];
+          then
+              imageName=$imageName"-pre"
+          elif [ "${{ github.ref }}" = "refs/heads/master" ];
+          then
+              imageName=$imageName"-prod"
+          else
+              echo "incorrect branch"
+              exit 1
+          fi
+          echo $imageName
