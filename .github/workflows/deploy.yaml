@@ -13,22 +13,22 @@ jobs:
         run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin 
       - name: building image
         run: docker build -t $IMAGENAME .
-
-      - name: "configuring imageName"
+      - name: "tagging image"
         run: |
           if [ "${{ github.ref }}" = "refs/heads/dev" ];
           then
-              IMAGENAME=$IMAGENAME-$STAGE
+              STAGE=dev
           elif [ "${{ github.ref }}" = "refs/heads/staging" ];
           then
               STAGE=pre
-              IMAGENAME=$IMAGENAME-$STAGE
           elif [ "${{ github.ref }}" = "refs/heads/master" ];
           then
               STAGE=prod
-              IMAGENAME=$IMAGENAME-$STAGE
           else
               echo "incorrect branch"
               exit 1
           fi
+          FULLIMAGE=${{ github.repository }}/$IMAGENAME-$STAGE:${{ github.sha }}
+          echo $FULLIMAGE
+          docker tag $IMAGENAME $FULLIMAGE
 
