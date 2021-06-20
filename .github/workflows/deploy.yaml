@@ -29,6 +29,6 @@ jobs:
               exit 1
           fi
           FULLIMAGE=${{ github.repository }}/$IMAGENAME-$STAGE:${{ github.sha }}
-          echo $FULLIMAGE
           docker tag $IMAGENAME $FULLIMAGE
+          docker push $FULLIMAGE
 
