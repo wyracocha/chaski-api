@@ -9,8 +9,11 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: "building image"
+      - name: docker login
+        run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin 
+      - name: building image
         run: docker build -t $IMAGENAME .
+
       - name: "configuring imageName"
         run: |
           if [ "${{ github.ref }}" = "refs/heads/dev" ];
