@@ -1,8 +1,5 @@
 name: creating container
-on: 
-  push:
-    branches:
-      - dev
+on: [push]
 jobs:
   build-image:
     runs-on: ubuntu-latest
