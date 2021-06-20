@@ -25,7 +25,5 @@ jobs:
               exit 1
           fi
       - name: "building image"
-        run: |
-          ls
-          echo $IMAGENAME
+        run: ls
 
