@@ -22,7 +22,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.repository_owner }}/$IMAGENAME:${{ github.sha }}
+          tags: ${{ github.repository_owner }}/$IMAGENAME:${{ github.sha }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
