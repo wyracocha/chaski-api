@@ -3,9 +3,6 @@ on: [push]
 jobs:
   build-image:
     runs-on: ubuntu-latest
-    env:
-      IMAGENAME: chaski-api
-      STAGE: dev
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -22,7 +19,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ github.repository_owner }}/$IMAGENAME:${{ github.sha }}
+          tags: ${{ github.repository_owner }}/chaski-api:${{ github.sha }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
