@@ -25,5 +25,5 @@ jobs:
               exit 1
           fi
       - name: "building image"
-        run: docker build -t $IMAGENAME-$STAGE:${{ github.sha }} .
+        run: docker build -t $IMAGENAME-$STAGE:${{ github.sha }} -f Dockerfile
 
