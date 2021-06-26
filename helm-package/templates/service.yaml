@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-{{.Chart.Name }}
+  name: {{ .Chart.Name }}
   labels:
-    stage: dev
+    env: prod
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    stage: dev
+    env: prod
