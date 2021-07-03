@@ -1,13 +1,24 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: {{ .Chart.Name }}
+  name: "{{ .Release.Name }}-ingress"
+  annotations:
+    kubernetes.io/ingress.class: "nginx" 
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "le-prod" 
 spec:
-  entryPoints:
-    - web
-  routes:
-  - match: Host(`{{ .Values.service.domain }}`) 
-    kind: Rule
-    services:
-    - name: {{ .Chart.Name }}
-      port: 80
+  tls:
+  - hosts:
+    - {{ .Values.service.domain }}
+    secretName: "{{ .Release.Name }}-ingress-secret"
+  rules:
+  - host: {{ .Values.service.domain }}
+    http:
+      paths:
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: "{{ .Release.Name }}-svc"
+            port:
+              number: 80

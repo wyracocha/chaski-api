@@ -13,8 +13,9 @@ imagePullSecrets: []
 service:
   type: ClusterIP
   port: 80
-  domain: chaski.wyracocha.com
-
+  domain: chaski-api.wyracocha.com
+le:
+  email: maliaga.pantoja@gmail.com
 autoscaling:
   replicaCount: 3
   enabled: true

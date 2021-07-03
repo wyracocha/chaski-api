@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ .Chart.Name }}
+  name: "{{ .Release.Name }}-registry"
 data:
   .dockerconfigjson: eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoibWFsaWFnYS1wYW50b2phIiwicGFzc3dvcmQiOiJnaHBfZ1dTNUR5eGZOSzNJSE5UNFhjeWpMY2V1YVNYU1JQM0NBM1loIiwiZW1haWwiOiJtYWxpYWdhLnBhbnRvamFAZ21haWwuY29tIiwiYXV0aCI6ImJXRnNhV0ZuWVMxd1lXNTBiMnBoT21kb2NGOW5WMU0xUkhsNFprNUxNMGxJVGxRMFdHTjVha3hqWlhWaFUxaFRVbEF6UTBFeldXZz0ifX19
 type: kubernetes.io/dockerconfigjson
