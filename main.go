@@ -30,6 +30,10 @@ func main() {
 	//var payload domain.Payload
 	r.Any("/", func(c *gin.Context) {
 		payloadString := c.GetHeader("Payload")
+		c.Header("Powered-By", "Chaski")
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Methods", "GET,POST")
+		c.Header("Access-Control-Allow-Headers", "Content-Type,Payload")
 		c.JSON(http.StatusOK, gin.H{"body": payloadString})
 		return
 	})
