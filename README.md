@@ -14,3 +14,4 @@ The response is returning in next format:
 ## Roadmap
 - Support for **api keys**
 - Add **rate limit**
+- Return custom headers in response
