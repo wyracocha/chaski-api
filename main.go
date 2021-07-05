@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -12,8 +13,21 @@ import (
 
 func main() {
 	r := gin.Default()
-	p := ginprometheus.NewPrometheus("chaski-api")
+	p := ginprometheus.NewPrometheus("gin")
+
+	p.ReqCntURLLabelMappingFn = func(c *gin.Context) string {
+		url := c.Request.URL.Path
+		for _, p := range c.Params {
+			if p.Key == "name" {
+				url = strings.Replace(url, p.Value, ":name", 1)
+				break
+			}
+		}
+		return url
+	}
+
 	p.Use(r)
+
 	r.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
 
 		// your custom format
