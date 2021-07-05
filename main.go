@@ -7,10 +7,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	ginprometheus "github.com/zsais/go-gin-prometheus"
 )
 
 func main() {
 	r := gin.Default()
+	p := ginprometheus.NewPrometheus("chaski-api")
+	p.Use(r)
 	r.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
 
 		// your custom format
