@@ -17,6 +17,10 @@ spec:
       labels:
         env: prod
         type: web
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "80"
     spec:
       containers:
         - name: {{ .Release.Name }}
